@@ -1,0 +1,2 @@
+# CoronaStatisticsApp
+Initial commit
