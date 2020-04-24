@@ -1,8 +1,10 @@
 package com.srushti.coronastats.states.model.repository
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class DmState(
     @SerializedName("confirmed_foreign")
     var confirmedForeign: String? = null,
@@ -16,4 +18,4 @@ data class DmState(
     var id: String? = null,
     @SerializedName("place")
     var place: String? = null
-)
+) : Parcelable

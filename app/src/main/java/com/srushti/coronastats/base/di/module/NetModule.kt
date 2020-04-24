@@ -1,11 +1,14 @@
 package com.srushti.coronastats.base.di.module
 
+import androidx.lifecycle.ViewModel
+import com.srushti.coronastats.base.ViewModelProviderFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Provider
 import javax.inject.Singleton
 
 
@@ -35,5 +38,11 @@ class NetModule {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideViewModelFactory(viewModelMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProviderFactory {
+        return ViewModelProviderFactory(viewModelMap)
     }
 }
