@@ -7,7 +7,7 @@
 
         <variable
             name="stateListViewModel"
-            type="com.srushti.coronastats.states.viewmodel.StateListViewModel" />
+            type="com.srushti.covid19stats.state.viewmodel.StateListViewModel" />
     </data>
 
     <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
