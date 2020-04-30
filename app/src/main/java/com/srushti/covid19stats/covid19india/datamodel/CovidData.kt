@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class CovidData(
     @SerializedName("cases_time_series")
-    var casesTimeSeries: List<CasesTimeSery?>? = null,
+    var casesTimeSeries: List<CasesTimeSery>? = null,
     @SerializedName("statewise")
-    var statewise: List<DmState?>? = null,
+    var statewise: List<DmState>? = null,
     @SerializedName("tested")
-    var tested: List<Tested?>? = null
+    var tested: List<Tested>? = null
 )

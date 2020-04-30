@@ -3,6 +3,7 @@ package com.srushti.covid19stats.base.di.component
 import android.app.Application
 import com.srushti.covid19stats.base.di.module.NetModule
 import dagger.Component
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
@@ -17,5 +18,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [NetModule::class])
 interface NetComponent {
+    val retrofit: Retrofit
+
     fun inject(application: Application)
 }

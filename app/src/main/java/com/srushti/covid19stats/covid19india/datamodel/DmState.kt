@@ -1,8 +1,10 @@
 package com.srushti.covid19stats.covid19india.datamodel
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class DmState(
     @SerializedName("active")
     var active: String? = null,
@@ -26,4 +28,4 @@ data class DmState(
     var statecode: String? = null,
     @SerializedName("statenotes")
     var statenotes: String? = null
-)
+) : Parcelable

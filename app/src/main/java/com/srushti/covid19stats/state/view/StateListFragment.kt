@@ -3,12 +3,14 @@ package com.srushti.covid19stats.state.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.srushti.covid19stats.app.CovidApp
 import com.srushti.covid19stats.base.ViewModelProviderFactory
-import com.srushti.covid19stats.base.di.component.DaggerNetComponent
 import com.srushti.covid19stats.databinding.FragmentStateListBinding
 import com.srushti.covid19stats.state.di.component.DaggerStateListComponent
 import com.srushti.covid19stats.state.di.module.StateListModule
@@ -54,9 +56,8 @@ class StateListFragment : Fragment() {
 
 
     private fun buildDaggerComponent() {
-        val netComponent = DaggerNetComponent.create()
         DaggerStateListComponent.builder()
-            .netComponent(netComponent)
+            .netComponent(CovidApp.netComponent)
             .stateListModule(StateListModule())
             .build()
             .inject(this)
@@ -75,9 +76,19 @@ class StateListFragment : Fragment() {
         binding.rvStateList.adapter = stateListAdapter
 
         viewModel.stateListLiveData.observe(viewLifecycleOwner, Observer {
+            binding.rvStateList.visibility = VISIBLE
             stateListAdapter.submitList(it)
         })
 
+        viewModel.loadingLiveData.observe(viewLifecycleOwner, Observer {
+
+            binding.progressBar.visibility = if (it == 0) {
+                GONE
+            } else {
+                binding.rvStateList.visibility = GONE
+                VISIBLE
+            }
+        })
 
     }
 }

@@ -2,7 +2,9 @@ package com.srushti.covid19stats.state.model.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.srushti.covid19stats.covid19india.api.CovidIndiaService
-import com.srushti.covid19stats.covid19india.datamodel.DmState
+import com.srushti.covid19stats.covid19india.datamodel.CovidData
+import com.srushti.covid19stats.covid19india.datamodel.NetworkState
+import com.srushti.covid19stats.utils.executeCoroutine
 import javax.inject.Inject
 
 
@@ -13,59 +15,14 @@ import javax.inject.Inject
  * @author Srushti Patel (srushtip@meditab.com) Meditab Software Inc.
  * @since 25/4/20 3:48 PM
  */
-class StateDataRepository @Inject constructor(val stateListService: CovidIndiaService) {
-    suspend fun fetchStateList(): MutableLiveData<List<DmState>> {
-        val stateList = arrayListOf<DmState>()
-        stateList.add(
-            DmState(
-                state = "Gujarat"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Maharastra"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Rajasthan"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Delhi"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Tamilnadu"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Punjab"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Bihar"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Kolkata"
-            )
-        )
-        stateList.add(
-            DmState(
-                state = "Karnataka"
-            )
-        )
+class StateDataRepository @Inject constructor(private val stateListService: CovidIndiaService) {
+    suspend fun fetchStateList(): MutableLiveData<NetworkState<CovidData?>> {
+        val statesLiveData = MutableLiveData<NetworkState<CovidData?>>()
 
-        val stateData = stateListService.getCovidIndiaData()
-        val statesLiveData = MutableLiveData<List<DmState>>()
-        statesLiveData.value = stateData.body()
-
+        val stateData = executeCoroutine {
+            stateListService.getCovidIndiaData()
+        }
+        statesLiveData.value = stateData
 
         return statesLiveData
     }

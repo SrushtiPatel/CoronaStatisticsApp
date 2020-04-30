@@ -3,6 +3,7 @@ package com.srushti.covid19stats.app
 import android.app.Application
 import com.srushti.covid19stats.base.di.component.DaggerNetComponent
 import com.srushti.covid19stats.base.di.component.NetComponent
+import com.srushti.covid19stats.base.di.module.NetModule
 
 
 /**
@@ -22,7 +23,7 @@ class CovidApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        netComponent = DaggerNetComponent.create()
+        netComponent = DaggerNetComponent.builder().netModule(NetModule()).build()
         netComponent.inject(this)
 
     }

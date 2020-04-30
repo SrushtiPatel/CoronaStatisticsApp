@@ -36,6 +36,7 @@ class StateListModule {
 //        )
 //    }
 
+    @PerFragment
     @Provides
     fun provideStateDataApi(retrofit: Retrofit): CovidIndiaService {
         return retrofit.create(CovidIndiaService::class.java)

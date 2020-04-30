@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.srushti.covid19stats.covid19india.datamodel.DmState
+import com.srushti.covid19stats.covid19india.datamodel.NetworkState
 import com.srushti.covid19stats.state.model.repository.StateDataRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,16 +20,34 @@ import javax.inject.Inject
  */
 class StateListViewModel @Inject constructor(val repository: StateDataRepository) : ViewModel() {
     val stateListLiveData: LiveData<List<DmState>>
+    val loadingLiveData = MutableLiveData<Int>()
+//    lateinit var loadingData: MutableLiveData<Int>
 
     init {
         stateListLiveData = getStatewiseData()
+        setLoadingState(1)
+    }
+
+    private fun setLoadingState(progress: Int) {
+        loadingLiveData.value = 1
     }
 
     private fun getStatewiseData(): MutableLiveData<List<DmState>> {
         val statesLiveData = MutableLiveData<List<DmState>>()
 
         viewModelScope.launch {
-            statesLiveData.value = repository.fetchStateList().value
+            when (val networkState = repository.fetchStateList().value) {
+                is NetworkState.Success -> {
+                    statesLiveData.value = networkState.data?.statewise
+                    loadingLiveData.value = 0
+                }
+
+                else -> {
+                    statesLiveData.value = null
+                    loadingLiveData.value = 0
+                }
+
+            }
         }
         return statesLiveData
     }
