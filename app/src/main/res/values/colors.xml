@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5AA66B</color>
-    <color name="colorPrimaryDark">#4B8858</color>
-    <color name="colorAccent">#830930</color>
+    <color name="colorPrimary">#5E9F6C</color>
+    <color name="colorPrimaryDark">#50885D</color>
+    <color name="colorAccent">#9E0B3A</color>
     <color name="white">#ffffff</color>
+    <color name="app_blue">#0657D1</color>
+    <color name="app_red">#FA3021</color>
+    <color name="app_green">#1CC909</color>
+    <color name="card_background_primary">#665E9F6C</color>
 </resources>

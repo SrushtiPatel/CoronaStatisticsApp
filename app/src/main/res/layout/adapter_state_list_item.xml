@@ -9,51 +9,103 @@
             type="com.srushti.covid19stats.covid19india.datamodel.DmState" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/tvStateName"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{stateData.state}"
-            app:layout_constraintEnd_toStartOf="@id/tvTotalCase"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTotalCase"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{stateData.confirmed}"
-            app:layout_constraintEnd_toStartOf="@id/tvTotalDeath"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/tvStateName"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvStateName"
+                style="@style/tvLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{stateData.state}"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvTotalDeath"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{stateData.deaths}"
-            app:layout_constraintEnd_toStartOf="@id/tvTotalRecovered"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/tvTotalCase"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvTotalCase"
+                style="@style/tvDigitsLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{stateData.confirmed}"
+                android:textColor="@color/app_blue"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalDeath"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStateName" />
 
-        <TextView
-            android:id="@+id/tvTotalRecovered"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{stateData.recovered}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/tvTotalDeath"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                style="@style/tvLabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="@color/app_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvTotalCase"
+                app:layout_constraintStart_toStartOf="@+id/tvTotalCase"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalCase" />
+
+            <TextView
+                android:id="@+id/tvTotalDeath"
+                style="@style/tvDigitsLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{stateData.deaths}"
+                android:textColor="@color/app_red"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalRecovered"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/tvTotalCase"
+                app:layout_constraintTop_toBottomOf="@+id/tvStateName" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/tvLabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deceased"
+                android:textColor="@color/app_red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvTotalDeath"
+                app:layout_constraintStart_toStartOf="@+id/tvTotalDeath"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalDeath" />
+
+            <TextView
+                android:id="@+id/tvTotalRecovered"
+                style="@style/tvDigitsLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{stateData.recovered}"
+                android:textColor="@color/app_green"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/tvTotalDeath"
+                app:layout_constraintTop_toBottomOf="@id/tvStateName" />
+
+            <TextView
+                style="@style/tvLabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deceased"
+                android:textColor="@color/app_green"
+                app:layout_constraintEnd_toEndOf="@+id/tvTotalRecovered"
+                app:layout_constraintStart_toStartOf="@+id/tvTotalRecovered"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalRecovered" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
